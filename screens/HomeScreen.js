@@ -14,6 +14,16 @@ import {
 
 import { MonoText } from '../components/StyledText';
 
+/*import {
+  Cell, 
+  Section,
+  TableView
+} from 'react-native-tableview-simple';*/
+
+/*var TableView = require('react-native-tableview');
+var Section = TableView.Section;
+var Item = TableView.Item;*/
+
 export default class HomeScreen extends React.Component {
   static route = {
     navigationBar: {
