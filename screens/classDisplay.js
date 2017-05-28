@@ -28,16 +28,15 @@ var Item = TableView.Item;*/
 
 GLOBAL = require('../Globals');
 
-export default class HomeScreen extends React.Component {
+export default class classDisplay extends React.Component {
   static route = {
     navigationBar: {
       visible: true,
     },
   };
 
-  gotoClass(i){
-    GLOBAL.classToDisplay = GLOBAL.getClass(i)
-    GLOBAL.hsNavigator.push(Router.getRoute('classDisplay'))
+  gotoClass(){
+    this.props.navigator.push(Router.getRoute('about'))
   }
 
   getClass(i){
@@ -45,17 +44,15 @@ export default class HomeScreen extends React.Component {
   }
 
   renderItem(x, i) {
-    return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => GLOBAL.gotoClass(i)}/>
+    return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => alert(GLOBAL.getClass(i))}/>
   }
 
   getData(){
-    return ["Autism", "Down Syndrome", "Cancer", "OK Can Sir"]
+    return GLOBAL.classToDisplay
   }
 
   render() {
-    GLOBAL.hsNavigator = this.props.navigator
     GLOBAL.getClass = this.getClass
-    GLOBAL.gotoClass = this.gotoClass
     let cells = this.getData().map(this.renderItem)
     return (
       <View style={styles.container}>
