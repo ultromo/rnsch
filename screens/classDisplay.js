@@ -32,6 +32,7 @@ export default class classDisplay extends React.Component {
   static route = {
     navigationBar: {
       visible: true,
+      title: "Class "+GLOBAL.currClassName,
     },
   };
 

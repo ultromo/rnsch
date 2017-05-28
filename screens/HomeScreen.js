@@ -32,10 +32,12 @@ export default class HomeScreen extends React.Component {
   static route = {
     navigationBar: {
       visible: true,
+      title: "Your Classes",
     },
   };
 
   gotoClass(i){
+    GLOBAL.currClassName = GLOBAL.getClassList()[i]
     GLOBAL.classToDisplay = GLOBAL.getClass(i)
     GLOBAL.hsNavigator.push(Router.getRoute('classDisplay'))
   }
@@ -48,15 +50,16 @@ export default class HomeScreen extends React.Component {
     return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => GLOBAL.gotoClass(i)}/>
   }
 
-  getData(){
+  getClassList(){
     return ["Autism", "Down Syndrome", "Cancer", "OK Can Sir"]
   }
 
   render() {
+    GLOBAL.getClassList = this.getClassList
     GLOBAL.hsNavigator = this.props.navigator
     GLOBAL.getClass = this.getClass
     GLOBAL.gotoClass = this.gotoClass
-    let cells = this.getData().map(this.renderItem)
+    let cells = this.getClassList().map(this.renderItem)
     return (
       <View style={styles.container}>
         <ScrollView
