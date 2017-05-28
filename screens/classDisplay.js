@@ -32,20 +32,32 @@ export default class classDisplay extends React.Component {
   static route = {
     navigationBar: {
       visible: true,
-      title: "Class "+GLOBAL.currClassName,
+      title(params) {
+        if (typeof params.className === 'undefined') {
+          return '';
+        }
+
+        return params.className
+       },
     },
   };
 
-  gotoClass(){
-    this.props.navigator.push(Router.getRoute('about'))
+  componentDidMount(){
+    setTimeout(() => {
+      this.props.navigator.updateCurrentRouteParams({
+        className: "Class "+GLOBAL.currClassName
+      })
+    }, 500)
   }
 
-  getClass(i){
-    return [["Lol", "Hi"], ["Ok"], ["Is"], ["And"]][i]
+  gotoStudentProfile(x, i){
+    GLOBAL.currStudentName = x
+    GLOBAL.currStudentProfile = GLOBAL.studentProfiles[i]
+    GLOBAL.classDisplayNavigation.push(Router.getRoute('studentProfile'))
   }
 
   renderItem(x, i) {
-    return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => alert(GLOBAL.getClass(i))}/>
+    return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => GLOBAL.gotoStudentProfile(x, i)}/>
   }
 
   getData(){
@@ -53,7 +65,8 @@ export default class classDisplay extends React.Component {
   }
 
   render() {
-    GLOBAL.getClass = this.getClass
+    GLOBAL.gotoStudentProfile = this.gotoStudentProfile
+    GLOBAL.classDisplayNavigation = this.props.navigator
     let cells = this.getData().map(this.renderItem)
     return (
       <View style={styles.container}>

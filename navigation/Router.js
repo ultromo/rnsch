@@ -5,6 +5,7 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import RootNavigation from './RootNavigation';
 import classDisplay from '../screens/classDisplay';
+import studentProfile from '../screens/studentProfile'
 
 export default createRouter(() => ({
   home: () => HomeScreen,
@@ -12,4 +13,5 @@ export default createRouter(() => ({
   settings: () => SettingsScreen,
   rootNavigation: () => RootNavigation,
   classDisplay: () => classDisplay,
+  studentProfile: () => studentProfile,
 }));

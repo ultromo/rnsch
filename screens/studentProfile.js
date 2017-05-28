@@ -28,44 +28,38 @@ var Item = TableView.Item;*/
 
 GLOBAL = require('../Globals');
 
-export default class HomeScreen extends React.Component {
+export default class studentProfile extends React.Component {
   static route = {
     navigationBar: {
       visible: true,
-      title: "Your Classes",
+      title(params) {
+        if (typeof params.studentName === 'undefined') {
+          return '';
+        }
+
+        return params.studentName
+       },
     },
   };
 
-  gotoClass(i){
-    GLOBAL.currClassName = GLOBAL.getClassList()[i]
-    GLOBAL.classToDisplay = GLOBAL.getClass(i)
-    GLOBAL.studentProfiles = GLOBAL.getProfiles(i)
-    GLOBAL.hsNavigator.push(Router.getRoute('classDisplay'))
-  }
-
-  getClass(i){
-    return [["Lol", "Hi"], ["Ok"], ["Is"], ["And"]][i]
-  }
-
-  getProfiles(i){
-    return [[["Warning Slips: 9001", "Alternate Names: \"John Cena\""], ["Warning Slips: 9001"]], [["Warning Slips: 9002"]], [["Warning Slips: 9003"]], [["Warning Slips: 9004"]]][i]
+  componentDidMount(){
+    setTimeout(() => {
+      this.props.navigator.updateCurrentRouteParams({
+        studentName: GLOBAL.currStudentName+"'s Profile"
+      })
+    }, 500)
   }
 
   renderItem(x, i) {
-    return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => GLOBAL.gotoClass(i)}/>
+    return <Cell key={i} title={x} />
   }
 
-  getClassList(){
-    return ["Autism", "Down Syndrome", "Cancer", "OK Can Sir"]
+  getData(){
+    return GLOBAL.currStudentProfile
   }
 
   render() {
-    GLOBAL.getClassList = this.getClassList
-    GLOBAL.getProfiles = this.getProfiles
-    GLOBAL.hsNavigator = this.props.navigator
-    GLOBAL.getClass = this.getClass
-    GLOBAL.gotoClass = this.gotoClass
-    let cells = this.getClassList().map(this.renderItem)
+    let cells = this.getData().map(this.renderItem)
     return (
       <View style={styles.container}>
         <ScrollView
