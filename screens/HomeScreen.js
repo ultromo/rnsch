@@ -33,8 +33,22 @@ export default class HomeScreen extends React.Component {
     },
   };
 
+  getClass(i){
+    return ["Lol", "Ok", "Is", "And"]
+  }
+
+  getHandler(i){
+    let a = GLOBAL.getClass
+    function ret(){
+      let classi = a(i)
+      console.log(classi)
+    }
+    return ret
+  }
+
   renderItem(x, i) {
-    return <Cell key={i} title={x} />
+    let a = GLOBAL.getHandler(i)
+    return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={GLOBAL.getHandler(i)}/>
   }
 
   getData(){
@@ -42,6 +56,9 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
+    GLOBAL.getClass = this.getClass
+    GLOBAL.getHandler = this.getHandler
+    let a = this.getHandler(1)
     let cells = this.getData().map(this.renderItem)
     return (
       <View style={styles.container}>
