@@ -14,15 +14,17 @@ import {
 
 import { MonoText } from '../components/StyledText';
 
-/*import {
+import {
   Cell, 
   Section,
   TableView
-} from 'react-native-tableview-simple';*/
+} from 'react-native-tableview-simple';
 
 /*var TableView = require('react-native-tableview');
 var Section = TableView.Section;
 var Item = TableView.Item;*/
+
+GLOBAL = require('../Globals');
 
 export default class HomeScreen extends React.Component {
   static route = {
@@ -31,24 +33,26 @@ export default class HomeScreen extends React.Component {
     },
   };
 
-  renderItem({ item }) {
-    return <Text style={styles.row}>{item.key}</Text>;
+  renderItem(x, i) {
+    return <Cell key={i} title={x} />
   }
 
   getData(){
-    return [{key: 'Mei Zhangsuo', data:["Kennet", "Lol"]}, {key: 'Suo Zhangmei', data:["Potato"]}]
+    return ["Autism", "Down Syndrome", "Cancer", "OK Can Sir"]
   }
 
   render() {
+    let cells = this.getData().map(this.renderItem)
     return (
       <View style={styles.container}>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
-          <FlatList
-            data={this.getData()}
-            renderItem={this.renderItem}
-          />
+          <TableView>
+            <Section>
+              {cells}
+            </Section>
+          </TableView>
         </ScrollView>
       </View>
     );
@@ -71,7 +75,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   contentContainer: {
-    paddingTop: 80,
+    backgroundColor: '#EFEFF4',
+    paddingTop: 20,
   },
   welcomeContainer: {
     alignItems: 'center',
