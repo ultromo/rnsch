@@ -15,7 +15,7 @@ import {
 import { MonoText } from '../components/StyledText';
 
 import {
-  Cell, 
+  Cell,
   Section,
   TableView
 } from 'react-native-tableview-simple';
@@ -27,6 +27,8 @@ var Section = TableView.Section;
 var Item = TableView.Item;*/
 
 GLOBAL = require('../Globals');
+
+DataFetch = require('../DataFetch');
 
 export default class HomeScreen extends React.Component {
   static route = {
@@ -43,23 +45,14 @@ export default class HomeScreen extends React.Component {
     GLOBAL.hsNavigator.push(Router.getRoute('classDisplay'))
   }
 
-  getClass(i){
-    return [["Lol", "Hi"], ["Ok"], ["Is"], ["And"]][i]
-  }
-
-  getProfiles(i){
-    return [[["Warning Slips: 9001", "Alternate Names: \"John Cena\""], ["Warning Slips: 9001"]], [["Warning Slips: 9002"]], [["Warning Slips: 9003"]], [["Warning Slips: 9004"]]][i]
-  }
-
   renderItem(x, i) {
     return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => GLOBAL.gotoClass(i)}/>
   }
 
-  getClassList(){
-    return ["Autism", "Down Syndrome", "Cancer", "OK Can Sir"]
-  }
-
   render() {
+    this.getClassList = DataFetch.getClassList
+    this.getProfiles = DataFetch.getProfiles
+    this.getClass = DataFetch.getClass
     GLOBAL.getClassList = this.getClassList
     GLOBAL.getProfiles = this.getProfiles
     GLOBAL.hsNavigator = this.props.navigator
