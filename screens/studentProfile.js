@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   View,
-  FlatList
+  FlatList,
+  Alert
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
@@ -38,6 +39,10 @@ export default class studentProfile extends React.Component {
     this.DecrementCommendations = this.DecrementCommendations.bind(this)
     this.logGoodBehaviour = this.logGoodBehaviour.bind(this)
     this.commitText = this.commitText.bind(this)
+    this.appendGB = this.appendGB.bind(this)
+    this.askremoveGB = this.askremoveGB.bind(this)
+    this.renderGB = this.renderGB.bind(this)
+    this.actlaskremoveGB = this.actlaskremoveGB.bind(this)
   }
 
   static route = {
@@ -66,7 +71,7 @@ export default class studentProfile extends React.Component {
   }
 
   renderGB(x, i){
-    return <Cell key={i} title={x} />
+    return <Cell key={i} title={x} onPress={() => GLOBAL.actlaskremoveGB(i)}/>
   }
 
   getData(){
@@ -106,15 +111,23 @@ export default class studentProfile extends React.Component {
   }
 
   appendGB(text){
-    var temparr = this.state.gbcells.slice()
-    let cidx = this.state.gbcells.length
-    temparr.push(<Cell key={cidx} title={text} />)
-    this.setState({ gbcells: temparr });
+    GLOBAL.currStudentGB.push(GLOBAL.goodBehaviourText)
+    var temparragb = GLOBAL.currStudentGB.map(this.renderGB)
+    this.setState({ gbcells: temparragb });
+  }
+
+  actlaskremoveGB(i){
+    Alert.alert("Remove good behaviour record?", "", [{text: "Cancel", onPress: () => {}}, {text: "OK", onPress: () => {GLOBAL.askremoveGB(i)}}], { cancelable: false })
+  }
+
+  askremoveGB(i){
+    GLOBAL.currStudentGB.splice(i, 1)
+    var temparrargb = GLOBAL.currStudentGB.map(this.renderGB)
+    this.setState({ gbcells: temparrargb})
   }
 
   commitText(){
     if (GLOBAL.SAVETHISTEXT == true){
-      GLOBAL.currStudentGB.push(GLOBAL.goodBehaviourText)
       this.appendGB(GLOBAL.goodBehaviourText)
       clearInterval(GLOBAL.BUSYCHECK)
     }
@@ -129,6 +142,8 @@ export default class studentProfile extends React.Component {
   }
 
   render() {
+    GLOBAL.askremoveGB = this.askremoveGB
+    GLOBAL.actlaskremoveGB = this.actlaskremoveGB
     GLOBAL.studentProfileNavigation = this.props.navigator
     return (
       <View style={styles.container}>
