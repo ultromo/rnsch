@@ -15,7 +15,7 @@ import {
 import { MonoText } from '../components/StyledText';
 
 import {
-  Cell, 
+  Cell,
   Section,
   TableView
 } from 'react-native-tableview-simple';
@@ -29,6 +29,14 @@ var Item = TableView.Item;*/
 GLOBAL = require('../Globals');
 
 export default class studentProfile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state={stcells: this.getData().map(this.renderItem)};
+    this.appendData = this.appendData.bind(this)
+    this.IncrementCommendations = this.IncrementCommendations.bind(this)
+    this.DecrementCommendations = this.DecrementCommendations.bind(this)
+  }
+
   static route = {
     navigationBar: {
       visible: true,
@@ -58,8 +66,43 @@ export default class studentProfile extends React.Component {
     return GLOBAL.currStudentProfile
   }
 
+  appendData(text){
+    var temparr = this.state.stcells.slice()
+    let cidx = this.state.stcells.length
+    temparr.push(<Cell key={cidx} title={text} />)
+    this.setState({ stcells: temparr });
+  }
+
+  modifyData(text, index){
+    var temparr = this.state.stcells.slice()
+    let cidx = index
+    temparr.splice(index, 1, <Cell key={cidx} title={text} />)
+    this.setState({ stcells: temparr });
+  }
+
+  IncrementCommendations(){
+    var currComm = parseInt(GLOBAL.currStudentProfile[0].split(" ")[1])
+    currComm += 1
+    let commString = "Commendations: ".concat(currComm.toString())
+    GLOBAL.currStudentProfile[0] = commString
+    this.modifyData(commString, 0)
+    console.log(currComm)
+  }
+
+  DecrementCommendations(){
+    var currComm = parseInt(GLOBAL.currStudentProfile[0].split(" ")[1])
+    currComm -= 1
+    let commString = "Commendations: ".concat(currComm.toString())
+    GLOBAL.currStudentProfile[0] = commString
+    this.modifyData(commString, 0)
+    console.log(currComm)
+  }
+
+  logGoodBehaviour(){
+
+  }
+
   render() {
-    let cells = this.getData().map(this.renderItem)
     return (
       <View style={styles.container}>
         <ScrollView
@@ -67,7 +110,14 @@ export default class studentProfile extends React.Component {
           contentContainerStyle={styles.contentContainer}>
           <TableView>
             <Section>
-              {cells}
+              {this.state.stcells}
+            </Section>
+            <Section>
+              <Cell title={"Make commendation"} onPress={this.IncrementCommendations}/>
+              <Cell title={"Revoke commendation"} onPress={this.DecrementCommendations}/>
+            </Section>
+            <Section>
+              <Cell title={"Log good behaviour"} onPress={this.logGoodBehaviour}/>
             </Section>
           </TableView>
         </ScrollView>

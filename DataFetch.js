@@ -36,7 +36,7 @@ var loadData = function(){
     //simulated load data, server stuff not implemented yet
     //ideally we should be able to replicate changes made on server side quickly
     busywait(500);
-    Data = [["Autism", "Down Syndrome", "Cancer", "OK Can Sir"], [["Lol", "Hi"], ["Ok"], ["Is"], ["And"]], [[["Warning Slips: 9001", "Alternate Names: \"John Cena\""], ["Warning Slips: 9001"]], [["Warning Slips: 9002"]], [["Warning Slips: 9003"]], [["Warning Slips: 9004"]]]]
+    Data = [["Autism", "Down Syndrome", "Cancer", "OK Can Sir"], [["Lol", "Hi"], ["Ok"], ["Is"], ["And"]], [[["Commendations: 0", "Warning Slips: 9001", "Alternate Names: \"John Cena\""], ["Commendations: 0", "Warning Slips: 9001"]], [["Commendations: 0", "Warning Slips: 9002"]], [["Commendations: 0", "Warning Slips: 9003"]], [["Commendations: 0", "Warning Slips: 9004"]]]]
     //data format: [[CLASSLIST:CLASS,...],[STUDENTLISTS:[CLASS:STUDENT,...],...],[STUDENTPROFILELISTS:[CLASSPROFILELIST:[STUDENTPROFILEDATA:DATAPOINT,...],...],...]]
     dataInvalidated = false
   }
