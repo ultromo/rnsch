@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   View,
-  FlatList
+  FlatList,
+  TextInput
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
@@ -28,40 +29,41 @@ var Item = TableView.Item;*/
 
 GLOBAL = require('../Globals');
 
-DataFetch = require('../DataFetch');
+export default class goodBehaviour extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state={text: ""}
+    this.saveText = this.saveText.bind(this)
+    this.clearText = this.clearText.bind(this)
+  }
 
-export default class HomeScreen extends React.Component {
   static route = {
     navigationBar: {
       visible: true,
-      title: "Your Classes",
+      title(params) {
+        return "Log good behaviour"
+      },
     },
   };
 
-  gotoClass(i){
-    GLOBAL.currClassName = GLOBAL.getClassList()[i]
-    GLOBAL.classToDisplay = GLOBAL.getClass(i)
-    GLOBAL.studentProfiles = GLOBAL.getProfiles(i)
-    GLOBAL.studentGB = GLOBAL.getGB(i)
-    GLOBAL.hsNavigator.push(Router.getRoute('classDisplay'))
+  componentDidMount(){
   }
 
-  renderItem(x, i) {
-    return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => GLOBAL.gotoClass(i)}/>
+  saveText(){
+    GLOBAL.goodBehaviourText = this.state.text
+    GLOBAL.classDisplayNavigation.pop()
+    GLOBAL.SAVETHISTEXT = true
+  }
+
+  clearText(){
+    GLOBAL.SAVETHISTEXT = false
+    GLOBAL.goodBehaviourText = ""
+    this.setState({
+      text: ""
+    })
   }
 
   render() {
-    this.getClassList = DataFetch.getClassList
-    this.getProfiles = DataFetch.getProfiles
-    this.getClass = DataFetch.getClass
-    this.getGB = DataFetch.getGB
-    GLOBAL.getClassList = this.getClassList
-    GLOBAL.getProfiles = this.getProfiles
-    GLOBAL.hsNavigator = this.props.navigator
-    GLOBAL.getClass = this.getClass
-    GLOBAL.getGB = this.getGB
-    GLOBAL.gotoClass = this.gotoClass
-    let cells = this.getClassList().map(this.renderItem)
     return (
       <View style={styles.container}>
         <ScrollView
@@ -69,9 +71,24 @@ export default class HomeScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}>
           <TableView>
             <Section>
-              {cells}
+              <Cell key={0} title={"Save and exit"} onPress={this.saveText}/>
+              <Cell key={1} title={"Clear"} onPress={this.clearText}/>
             </Section>
           </TableView>
+          <TextInput
+            style={{height:1080, fontSize:20}}
+            multiline = {true}
+            numberOfLines = {4}
+            onChangeText={(text) => {
+              this.setState({text})
+            }}
+            value={this.state.text}
+            editable = {true}
+            maxLength = {500}
+            placeholder = "What good behaviour did you observe?"
+            placeholderTextColor = "grey"
+            autoFocus = {true}
+          />
         </ScrollView>
       </View>
     );

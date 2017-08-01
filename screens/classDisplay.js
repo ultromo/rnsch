@@ -15,7 +15,7 @@ import {
 import { MonoText } from '../components/StyledText';
 
 import {
-  Cell, 
+  Cell,
   Section,
   TableView
 } from 'react-native-tableview-simple';
@@ -53,6 +53,7 @@ export default class classDisplay extends React.Component {
   gotoStudentProfile(x, i){
     GLOBAL.currStudentName = x
     GLOBAL.currStudentProfile = GLOBAL.studentProfiles[i]
+    GLOBAL.currStudentGB = GLOBAL.studentGB[i]
     GLOBAL.classDisplayNavigation.push(Router.getRoute('studentProfile'))
   }
 

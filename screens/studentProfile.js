@@ -31,10 +31,13 @@ GLOBAL = require('../Globals');
 export default class studentProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state={stcells: this.getData().map(this.renderItem)};
+    this.state={stcells: this.getData().map(this.renderItem), gbcells: GLOBAL.currStudentGB.map(this.renderGB)};
     this.appendData = this.appendData.bind(this)
+    this.appendGB = this.appendGB.bind(this)
     this.IncrementCommendations = this.IncrementCommendations.bind(this)
     this.DecrementCommendations = this.DecrementCommendations.bind(this)
+    this.logGoodBehaviour = this.logGoodBehaviour.bind(this)
+    this.commitText = this.commitText.bind(this)
   }
 
   static route = {
@@ -59,6 +62,10 @@ export default class studentProfile extends React.Component {
   }
 
   renderItem(x, i) {
+    return <Cell key={i} title={x} />
+  }
+
+  renderGB(x, i){
     return <Cell key={i} title={x} />
   }
 
@@ -98,11 +105,31 @@ export default class studentProfile extends React.Component {
     console.log(currComm)
   }
 
-  logGoodBehaviour(){
+  appendGB(text){
+    var temparr = this.state.gbcells.slice()
+    let cidx = this.state.gbcells.length
+    temparr.push(<Cell key={cidx} title={text} />)
+    this.setState({ gbcells: temparr });
+  }
 
+  commitText(){
+    if (GLOBAL.SAVETHISTEXT == true){
+      GLOBAL.currStudentGB.push(GLOBAL.goodBehaviourText)
+      this.appendGB(GLOBAL.goodBehaviourText)
+      clearInterval(GLOBAL.BUSYCHECK)
+    }
+  }
+
+  logGoodBehaviour(){
+    clearInterval(GLOBAL.BUSYCHECK)
+    GLOBAL.goodBehaviourText = ""
+    GLOBAL.SAVETHISTEXT = false
+    GLOBAL.classDisplayNavigation.push(Router.getRoute('goodBehaviour'))
+    GLOBAL.BUSYCHECK = setInterval(this.commitText, 100);
   }
 
   render() {
+    GLOBAL.studentProfileNavigation = this.props.navigator
     return (
       <View style={styles.container}>
         <ScrollView
@@ -117,7 +144,10 @@ export default class studentProfile extends React.Component {
               <Cell title={"Revoke commendation"} onPress={this.DecrementCommendations}/>
             </Section>
             <Section>
-              <Cell title={"Log good behaviour"} onPress={this.logGoodBehaviour}/>
+              <Cell title={"Log good behaviour"} onPress={this.logGoodBehaviour} accessory="DisclosureIndicator"/>
+            </Section>
+            <Section>
+              {this.state.gbcells}
             </Section>
           </TableView>
         </ScrollView>
