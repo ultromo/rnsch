@@ -1,5 +1,7 @@
 var Data;
 
+var Feed;
+
 var busywait = function(milliseconds) {
 	var dt = new Date();
 	while ((new Date()) - dt <= milliseconds) {
@@ -49,6 +51,24 @@ var loadData = function(){
   }
 }
 
+var feedInvalidated = true
+
+var loadFeed = function(){
+	if (feedInvalidated == true){
+		busywait(500);
+		Feed = [["Student: Master Jhew Hay Cong", "Teacher: Mr Cancerous McCancerFace", "Good behaviour: Commendable behaviour! Autism observed.", "Date: 69/27/20169", 69], ["Student: Jaster Hhew Cay Mong", "Teacher: Mr Mhang Zheisuo", "Good behaviour: Commendable behaviour! Autism observed.", "Date: 29/27/20169", 29]]
+		//data format: [[Student, Teacher, Commendation, Time, UnixTime], ..]
+		feedInvalidated = false
+	}
+}
+
+var getFeed = function(){
+	if (feedInvalidated == true){
+		loadFeed()
+	}
+	return Feed
+}
+
 //conditions under which data is invalidated:
 //1) if we haven't implemented in-place data modification ie we modify student profiles directly when teachers make changes on their devices
 //2) how do we propagate changes in react again? my skill level too low
@@ -60,3 +80,6 @@ exports.getProfiles = getProfiles
 exports.authenticationKey = authenticationKey
 exports.dataInvalidated = dataInvalidated
 exports.getGB = getGB
+exports.getFeed = getFeed
+exports.loadData = loadData
+exports.loadFeed = loadFeed

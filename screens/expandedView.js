@@ -30,30 +30,24 @@ GLOBAL = require('../Globals');
 
 DataFetch = require('../DataFetch')
 
-export default class LinksScreen extends React.Component {
+export default class expandedView extends React.Component {
   constructor(props){
     super(props);
-    this.gotoExpandedView = this.gotoExpandedView.bind(this)
     this.mapToView = this.mapToView.bind(this)
   }
 
   static route = {
     navigationBar: {
-      title: 'Feed',
+      title: 'View good behaviour',
     },
   };
 
-  gotoExpandedView(x){
-    GLOBAL.expandedViewData = x
-    this.props.navigator.push(Router.getRoute("expandedView"))
-  }
-
   mapToView(x, i){
-    return <TouchableHighlight key={i} onPress={() => this.gotoExpandedView(x)}><View style={styles.container}><View style={styles.container}><Text style={styles.row}>{x[0]}</Text></View><View style={styles.container}><Text style={styles.row}>{x[1]}</Text></View><View style={styles.container}><Text style={styles.row}>{x[2]}</Text></View><View style={styles.container}><Text style={styles.row}>{x[3]}</Text></View></View></TouchableHighlight>
+    return <TouchableHighlight key={i}><View style={styles.container}><View style={styles.container}><Text style={styles.row}>{x[0]}</Text></View><View style={styles.container}><Text style={styles.row}>{x[1]}</Text></View><View style={styles.container}><Text style={styles.row}>{x[2]}</Text></View><View style={styles.container}><Text style={styles.row}>{x[3]}</Text></View></View></TouchableHighlight>
   }
 
   render() {
-    let views = DataFetch.getFeed().sort(function (a, b){return a[4]-b[4]}).map(this.mapToView)
+    let views = [GLOBAL.expandedViewData].map(this.mapToView)
     return (
       <ScrollView
         style={styles.container}
