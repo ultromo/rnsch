@@ -49,6 +49,15 @@ var loadData = function(){
   }
 }
 
+var loadDataFeed = function() {
+	if (dataInvalidated == true) {
+		busywait(500);
+		Data = [["Name", "Class", "Description", "Teacher", "unixtime"], ["Name2", "Class2", "Description2", "Teacher2", "unixtime2"]]
+		dataInvalidated = false
+		return Data
+	}
+}
+
 //conditions under which data is invalidated:
 //1) if we haven't implemented in-place data modification ie we modify student profiles directly when teachers make changes on their devices
 //2) how do we propagate changes in react again? my skill level too low
