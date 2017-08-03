@@ -117,7 +117,7 @@ export default class studentProfile extends React.Component {
   }
 
   actlaskremoveGB(i){
-    Alert.alert("Remove good behaviour record?", "", [{text: "Cancel", onPress: () => {}}, {text: "OK", onPress: () => {GLOBAL.askremoveGB(i)}}], { cancelable: false })
+    Alert.alert("Remove Good Behaviour record?", "", [{text: "Cancel", onPress: () => {}}, {text: "OK", onPress: () => {GLOBAL.askremoveGB(i)}}], { cancelable: false })
   }
 
   askremoveGB(i){
@@ -155,11 +155,11 @@ export default class studentProfile extends React.Component {
               {this.state.stcells}
             </Section>
             <Section>
-              <Cell title={"Make commendation"} onPress={this.IncrementCommendations}/>
-              <Cell title={"Revoke commendation"} onPress={this.DecrementCommendations}/>
+              <Cell title={"Make Commendation"} onPress={this.IncrementCommendations}/>
+              <Cell title={"Revoke Commendation"} onPress={this.DecrementCommendations}/>
             </Section>
             <Section>
-              <Cell title={"Log good behaviour"} onPress={this.logGoodBehaviour} accessory="DisclosureIndicator"/>
+              <Cell title={"Log Good Behaviour"} onPress={this.logGoodBehaviour} accessory="DisclosureIndicator"/>
             </Section>
             <Section>
               {this.state.gbcells}

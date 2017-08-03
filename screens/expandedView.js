@@ -38,7 +38,7 @@ export default class expandedView extends React.Component {
 
   static route = {
     navigationBar: {
-      title: 'View good behaviour',
+      title: 'View Good Behaviour',
     },
   };
 

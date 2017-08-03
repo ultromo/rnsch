@@ -56,7 +56,6 @@ var feedInvalidated = true
 var loadFeed = function(){
 	if (feedInvalidated == true){
 		busywait(500);
-		Feed = [["Student: Master Jhew Hay Cong", "Teacher: Mr Cancerous McCancerFace", "Good behaviour: Commendable behaviour! Autism observed.", "Date: 69/27/20169", 69], ["Student: Jaster Hhew Cay Mong", "Teacher: Mr Mhang Zheisuo", "Good behaviour: Commendable behaviour! Autism observed.", "Date: 29/27/20169", 29]]
 		//data format: [[Student, Teacher, Commendation, Time, UnixTime], ..]
 		feedInvalidated = false
 	}

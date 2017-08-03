@@ -41,7 +41,7 @@ export default class goodBehaviour extends React.Component {
     navigationBar: {
       visible: true,
       title(params) {
-        return "Log good behaviour"
+        return "Log Good Behaviour"
       },
     },
   };
@@ -71,7 +71,7 @@ export default class goodBehaviour extends React.Component {
           contentContainerStyle={styles.contentContainer}>
           <TableView>
             <Section>
-              <Cell key={0} title={"Save and exit"} onPress={this.saveText}/>
+              <Cell key={0} title={"Save and Exit"} onPress={this.saveText}/>
               <Cell key={1} title={"Clear"} onPress={this.clearText}/>
             </Section>
           </TableView>

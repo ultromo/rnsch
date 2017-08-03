@@ -43,13 +43,18 @@ export default class LinksScreen extends React.Component {
     },
   };
 
+  truncText(x){
+    }
+    return x
+  }
+
   gotoExpandedView(x){
     GLOBAL.expandedViewData = x
     this.props.navigator.push(Router.getRoute("expandedView"))
   }
 
   mapToView(x, i){
-    return <TouchableHighlight key={i} onPress={() => this.gotoExpandedView(x)}><View style={styles.container}><View style={styles.container}><Text style={styles.row}>{x[0]}</Text></View><View style={styles.container}><Text style={styles.row}>{x[1]}</Text></View><View style={styles.container}><Text style={styles.row}>{x[2]}</Text></View><View style={styles.container}><Text style={styles.row}>{x[3]}</Text></View></View></TouchableHighlight>
+    return <TouchableHighlight key={i} onPress={() => this.gotoExpandedView(x)}><View style={styles.container}><View style={styles.container}><Text style={styles.row}>{x[0]}</Text></View><View style={styles.container}><Text style={styles.row}>{x[1]}</Text></View><View style={styles.container}><Text style={styles.row}>{this.truncText(x[2])}</Text></View><View style={styles.container}><Text style={styles.row}>{x[3]}</Text></View></View></TouchableHighlight>
   }
 
   render() {

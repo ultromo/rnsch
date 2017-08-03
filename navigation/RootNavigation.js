@@ -27,21 +27,21 @@ export default class RootNavigation extends React.Component {
       <TabNavigation tabBarHeight={56} initialTab="home">
         <TabNavigationItem
           id="home"
-          title="Your classes"
+          title="Your Classes"
           renderIcon={isSelected => this._renderIcon('home', isSelected)}>
           <StackNavigation initialRoute="home" />
         </TabNavigationItem>
 
         <TabNavigationItem
           id="links"
-          title="Good behaviours"
+          title="Good Behaviours"
           renderIcon={isSelected => this._renderIcon('check', isSelected)}>
           <StackNavigation initialRoute="links" />
         </TabNavigationItem>
 
         <TabNavigationItem
           id="settings"
-          title="Bad behaviours"
+          title="Bad Behaviours"
           renderIcon={isSelected => this._renderIcon('remove', isSelected)}>
           <StackNavigation initialRoute="settings" />
         </TabNavigationItem>
