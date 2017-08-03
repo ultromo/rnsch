@@ -60,7 +60,7 @@ export default class LinksScreen extends React.Component {
   }
 
   render() {
-    let views = DataFetch.getFeed().sort(function (a, b){return a[4]-b[4]}).map(this.mapToView)
+    let views = DataFetch.getFeed().sort(function (a, b){return b[4]-a[4]}).map(this.mapToView)
     return (
       <ScrollView
         style={styles.container}
