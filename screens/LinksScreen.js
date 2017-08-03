@@ -28,7 +28,11 @@ var Item = TableView.Item;*/
 
 GLOBAL = require('../Globals');
 
+<<<<<<< HEAD
 DataFetch = require('../DataFetch')
+=======
+DataFetch = require('../DataFetch');
+>>>>>>> origin/master
 
 export default class LinksScreen extends React.Component {
   constructor(props){
@@ -39,6 +43,7 @@ export default class LinksScreen extends React.Component {
 
   static route = {
     navigationBar: {
+<<<<<<< HEAD
       title: 'Feed',
     },
   };
@@ -54,14 +59,77 @@ export default class LinksScreen extends React.Component {
 
   render() {
     let views = DataFetch.getFeed().sort(function (a, b){return a[4]-b[4]}).map(this.mapToView)
+=======
+      title: 'Good behaviours',
+    },
+  };
+
+  mapToView(data) {
+    <TouchableHighlight style = {styles.container}> data[0] </TouchableHighlight>
+  }
+
+  render() {
+    let thingy = DataFetch.loadDataFeed().map(this.mapToView)
+>>>>>>> origin/master
     return (
       <ScrollView
         style={styles.container}
         contentContainerStyle={this.props.route.getContentContainerStyle()}>
+<<<<<<< HEAD
         {views}
+=======
+
+        {thingy}
+
+
+>>>>>>> origin/master
       </ScrollView>
     );
   }
+
+  /*
+
+  gotoClass(i){
+    GLOBAL.currClassName = GLOBAL.getClassList()[i]
+    GLOBAL.classToDisplay = GLOBAL.getClass(i)
+    GLOBAL.studentProfiles = GLOBAL.getProfiles(i)
+    GLOBAL.studentGB = GLOBAL.getGB(i)
+    GLOBAL.hsNavigator.push(Router.getRoute('classDisplay'))
+  }
+
+  renderItem(x, i) {
+    return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => GLOBAL.gotoClass(i)}/>
+  }
+
+  render() {
+    this.getClassList = DataFetch.getClassList
+    this.getProfiles = DataFetch.getProfiles
+    this.getClass = DataFetch.getClass
+    this.getGB = DataFetch.getGB
+    GLOBAL.getClassList = this.getClassList
+    GLOBAL.getProfiles = this.getProfiles
+    GLOBAL.hsNavigator = this.props.navigator
+    GLOBAL.getClass = this.getClass
+    GLOBAL.getGB = this.getGB
+    GLOBAL.gotoClass = this.gotoClass
+    let cells = this.getClassList().map(this.renderItem)
+    return (
+      <View style={styles.container}>
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}>
+          <TableView>
+            <Section>
+              {cells}
+            </Section>
+          </TableView>
+        </ScrollView>
+      </View>
+    );
+  }
+
+  */
+
 }
 
 

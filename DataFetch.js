@@ -51,6 +51,7 @@ var loadData = function(){
   }
 }
 
+<<<<<<< HEAD
 var feedInvalidated = true
 
 var loadFeed = function(){
@@ -67,6 +68,15 @@ var getFeed = function(){
 		loadFeed()
 	}
 	return Feed
+=======
+var loadDataFeed = function() {
+	if (dataInvalidated == true) {
+		busywait(500);
+		Data = [["Name", "Class", "Description", "Teacher", "unixtime"], ["Name2", "Class2", "Description2", "Teacher2", "unixtime2"]]
+		dataInvalidated = false
+		return Data
+	}
+>>>>>>> origin/master
 }
 
 //conditions under which data is invalidated:

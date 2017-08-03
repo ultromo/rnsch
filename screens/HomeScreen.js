@@ -34,7 +34,7 @@ export default class HomeScreen extends React.Component {
   static route = {
     navigationBar: {
       visible: true,
-      title: "Your Classes",
+      title: "Your classes",
     },
   };
 
