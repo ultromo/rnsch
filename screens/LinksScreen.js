@@ -44,6 +44,8 @@ export default class LinksScreen extends React.Component {
   };
 
   truncText(x){
+    if (x.length > 1000){
+      return x.substring(0,1000)+"..."
     }
     return x
   }
