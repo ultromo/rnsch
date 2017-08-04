@@ -113,8 +113,6 @@ export default class LinksScreen extends React.Component {
   }
 
   mapToView(x, i){
-    var imwidth = 50;
-    var imheight = 50;
     Image.getSize(x[5], (width, height) => {this.guardSetWidth(width, i); this.guardSetHeight(height, i)});
     // <Image style={{width: win.width, height: win.width / this.state.width * this.state.height, marginTop: 10, marginBottom: 10}} source={{uri: x[5]}}/>
     if (this.isLong(x[2])) {

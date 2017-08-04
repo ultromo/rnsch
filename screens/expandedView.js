@@ -36,6 +36,7 @@ const win = Dimensions.get('window');
 export default class expandedView extends React.Component {
   constructor(props){
     super(props);
+    this.state={height:1, width:1}
     this.mapToView = this.mapToView.bind(this)
   }
 
@@ -45,7 +46,18 @@ export default class expandedView extends React.Component {
     },
   };
 
+  guardSetHeight(i){
+    if (i == this.state.height) return
+    this.setState({height: i})
+  }
+
+  guardSetWidth(i){
+    if (i == this.state.width) return
+    this.setState({width: i})
+  }
+
   mapToView(x, i){
+    Image.getSize(x[5], (width, height) => {this.guardSetWidth(width); this.guardSetHeight(height)});
     return (
       <TouchableHighlight key={i}>
         <View style={styles.container}>
@@ -58,7 +70,7 @@ export default class expandedView extends React.Component {
           <View style={styles.container}>
             <Text style={styles.teacherRow}>{x[1]}</Text>
           </View>
-          
+          <Image style={{width: win.width, height: win.width / this.state.width * this.state.height, marginTop: 10, marginBottom: 10}} source={{uri: x[5]}}/>
           <View style={styles.container}>
             <Text style={styles.descriptionRow}>{x[2]}</Text>
           </View>
