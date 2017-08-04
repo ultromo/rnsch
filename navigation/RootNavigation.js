@@ -28,33 +28,53 @@ export default class RootNavigation extends React.Component {
         <TabNavigationItem
           id="home"
           title="Your Classes"
-          renderIcon={isSelected => this._renderIcon('home', isSelected)}>
+          renderIcon={isSelected => this._renderIconYourClasses('home', isSelected)}>
           <StackNavigation initialRoute="home" />
         </TabNavigationItem>
 
         <TabNavigationItem
           id="links"
           title="Good Behaviours"
-          renderIcon={isSelected => this._renderIcon('check', isSelected)}>
+          renderIcon={isSelected => this._renderIconGoodBehaviours('check', isSelected)}>
           <StackNavigation initialRoute="links" />
         </TabNavigationItem>
 
         <TabNavigationItem
           id="settings"
           title="Bad Behaviours"
-          renderIcon={isSelected => this._renderIcon('remove', isSelected)}>
+          renderIcon={isSelected => this._renderIconBadBehaviours('remove', isSelected)}>
           <StackNavigation initialRoute="settings" />
         </TabNavigationItem>
       </TabNavigation>
     );
   }
 
-  _renderIcon(name, isSelected) {
+  _renderIconYourClasses(name, isSelected) {
     return (
       <FontAwesome
         name={name}
         size={32}
         color={isSelected ? Colors.tabIconSelected : Colors.tabIconDefault}
+      />
+    );
+  }
+
+  _renderIconGoodBehaviours(name, isSelected) {
+    return (
+      <FontAwesome
+        name={name}
+        size={32}
+        color={isSelected ? 'rgb(45, 196, 83)' : Colors.tabIconDefault}
+      />
+    );
+  }
+
+  _renderIconBadBehaviours(name, isSelected) {
+    return (
+      <FontAwesome
+        name={name}
+        size={32}
+        color={isSelected ? 'rgb(255, 22, 22)' : Colors.tabIconDefault}
       />
     );
   }

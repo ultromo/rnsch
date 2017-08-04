@@ -161,6 +161,7 @@ export default class studentProfile extends React.Component {
             <Section>
               <Cell title={"Log Good Behaviour"} onPress={this.logGoodBehaviour} accessory="DisclosureIndicator"/>
             </Section>
+            <View style={styles.gbContainer}><Text style={styles.gbText}>GOOD BEHAVIOURS</Text></View>
             <Section>
               {this.state.gbcells}
             </Section>
@@ -172,9 +173,19 @@ export default class studentProfile extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  gbText: {
+    marginLeft: 12,
+    fontSize: 14,
+    color: '#rgb(128, 128, 128)',
+  },
   row: {
     marginLeft: 12,
     fontSize: 16,
+  },
+  gbContainer: {
+    marginTop: 14,
+    flex: 1,
+    backgroundColor: '#EFEFF4',
   },
   container: {
     flex: 1,
