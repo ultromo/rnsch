@@ -57,6 +57,7 @@ export default class expandedView extends React.Component {
   }
 
   mapToView(x, i){
+    Image.prefetch(x[5])
     Image.getSize(x[5], (width, height) => {this.guardSetWidth(width); this.guardSetHeight(height)});
     return (
       <TouchableHighlight key={i}>
