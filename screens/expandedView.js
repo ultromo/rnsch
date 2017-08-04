@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   View,
-  FlatList
+  FlatList,
+  Dimensions,
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
@@ -30,6 +31,8 @@ GLOBAL = require('../Globals');
 
 DataFetch = require('../DataFetch')
 
+const win = Dimensions.get('window');
+
 export default class expandedView extends React.Component {
   constructor(props){
     super(props);
@@ -43,7 +46,25 @@ export default class expandedView extends React.Component {
   };
 
   mapToView(x, i){
-    return <TouchableHighlight key={i}><View style={styles.container}><View style={styles.container}><Text style={styles.row}>{x[0]}</Text></View><View style={styles.container}><Text style={styles.row}>{x[1]}</Text></View><View style={styles.container}><Text style={styles.row}>{x[2]}</Text></View><View style={styles.container}><Text style={styles.row}>{x[3]}</Text></View></View></TouchableHighlight>
+    return (
+      <TouchableHighlight key={i}>
+        <View style={styles.container}>
+          <View style={styles.container}>
+            <Text style={styles.nameRow}>{x[0]}</Text>
+          </View>
+          <View style={styles.container}>
+            <Text style={styles.dateRow}>{x[3]}</Text>
+          </View>
+          <View style={styles.container}>
+            <Text style={styles.teacherRow}>{x[1]}</Text>
+          </View>
+          
+          <View style={styles.container}>
+            <Text style={styles.descriptionRow}>{x[2]}</Text>
+          </View>
+        </View>
+      </TouchableHighlight>
+    );
   }
 
   render() {
@@ -58,15 +79,61 @@ export default class expandedView extends React.Component {
   }
 }
 
-
 const styles = StyleSheet.create({
-  row: {
+  spaceRow: {
+    marginTop: 3,
+  },
+  nameRow: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 2,
     marginLeft: 12,
+    marginRight: 12,
+  },
+  teacherRow: {
     fontSize: 16,
+    fontStyle: 'italic',
+    marginTop: 3,
+    marginBottom: 3,
+    marginLeft: 12,
+    marginRight: 12,
+  },
+  descriptionRow: {
+    fontSize: 16,
+    marginTop: 7,
+    marginBottom: 10,
+    marginLeft: 12,
+    marginRight: 12,
+    textAlign: 'justify',
+  },
+  viewFullRow: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginLeft: 12,
+    marginRight: 12,
+    marginBottom: 10,
+    color: '#7d8187',
+  },
+  dateRow: {
+    fontSize: 16,
+    // fontWeight: 'bold',
+    marginTop: 3,
+    marginBottom: 3,
+    marginLeft: 12,
+    marginRight: 12,
   },
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  spaceContainer: {
+    flex: 1,
+    backgroundColor: '#EFEFF4',
+  },
+  imageContainer: {
+    flex: 1,
+    alignItems: 'center',
   },
   developmentModeText: {
     marginBottom: 20,
