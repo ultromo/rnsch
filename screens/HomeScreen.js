@@ -31,6 +31,11 @@ GLOBAL = require('../Globals');
 DataFetch = require('../DataFetch');
 
 export default class HomeScreen extends React.Component {
+  constructor(props){
+    super(props);
+    GLOBAL.hsself = this;
+  }
+
   static route = {
     navigationBar: {
       visible: true,
@@ -38,30 +43,23 @@ export default class HomeScreen extends React.Component {
     },
   };
 
-  gotoClass(i){
-    GLOBAL.currClassName = GLOBAL.getClassList()[i]
-    GLOBAL.classToDisplay = GLOBAL.getClass(i)
-    GLOBAL.studentProfiles = GLOBAL.getProfiles(i)
-    GLOBAL.studentGB = GLOBAL.getGB(i)
-    GLOBAL.hsNavigator.push(Router.getRoute('classDisplay'))
+  gotoClass(x){
+    console.log(x)
+    GLOBAL.viewedClass = DataFetch.Data2["Classes"][x]
+    GLOBAL.currClassName = x
+    GLOBAL.hsself.props.navigator.push(Router.getRoute('classDisplay'))
   }
 
   renderItem(x, i) {
-    return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => GLOBAL.gotoClass(i)}/>
+    //return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => GLOBAL.gotoClass(i)}/>
+    return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => GLOBAL.hsself.gotoClass(x)}/>
   }
 
   render() {
-    this.getClassList = DataFetch.getClassList
-    this.getProfiles = DataFetch.getProfiles
-    this.getClass = DataFetch.getClass
-    this.getGB = DataFetch.getGB
-    GLOBAL.getClassList = this.getClassList
-    GLOBAL.getProfiles = this.getProfiles
-    GLOBAL.hsNavigator = this.props.navigator
-    GLOBAL.getClass = this.getClass
-    GLOBAL.getGB = this.getGB
-    GLOBAL.gotoClass = this.gotoClass
-    let cells = this.getClassList().map(this.renderItem)
+    DataFetch.loadData()
+    GLOBAL.Data2 = DataFetch.Data2
+    console.log(Object.keys(DataFetch.Data2["Classes"]))
+    let cells = Object.keys(DataFetch.Data2["Classes"]).sort().map(this.renderItem)
     return (
       <View style={styles.container}>
         <ScrollView

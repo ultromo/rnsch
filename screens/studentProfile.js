@@ -10,7 +10,8 @@ import {
   TouchableHighlight,
   View,
   FlatList,
-  Alert
+  Alert,
+  Dimensions
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
@@ -29,20 +30,13 @@ var Item = TableView.Item;*/
 
 GLOBAL = require('../Globals');
 
+const win = Dimensions.get('window');
+
 export default class studentProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state={stcells: this.getData().map(this.renderItem), gbcells: GLOBAL.currStudentGB.map(this.renderGB)};
-    this.appendData = this.appendData.bind(this)
-    this.appendGB = this.appendGB.bind(this)
-    this.IncrementCommendations = this.IncrementCommendations.bind(this)
-    this.DecrementCommendations = this.DecrementCommendations.bind(this)
-    this.logGoodBehaviour = this.logGoodBehaviour.bind(this)
-    this.commitText = this.commitText.bind(this)
-    this.appendGB = this.appendGB.bind(this)
-    this.askremoveGB = this.askremoveGB.bind(this)
-    this.renderGB = this.renderGB.bind(this)
-    this.actlaskremoveGB = this.actlaskremoveGB.bind(this)
+    GLOBAL.spself = this;
+    this.state={widthArray:[],heightArray:[],numcomm: GLOBAL.viewedStudent["Commendations"], stcells: GLOBAL.viewedStudent["_MiscProfileData"].map(this.renderItem), gbcells: GLOBAL.viewedStudent["_GoodBehaviours"].map(this.renderGB)};
   }
 
   static route = {
@@ -71,48 +65,89 @@ export default class studentProfile extends React.Component {
   }
 
   renderGB(x, i){
-    return <Cell key={i} title={x} onPress={() => GLOBAL.actlaskremoveGB(i)}/>
-  }
-
-  getData(){
-    return GLOBAL.currStudentProfile
+    Image.getSize(x["Image"], (width, height) => {GLOBAL.spself.guardSetWidth(width, i); GLOBAL.spself.guardSetHeight(height, i)});
+    // <Image style={{width: win.width, height: win.width / this.state.width * this.state.height, marginTop: 10, marginBottom: 10}} source={{uri: x[5]}}/>
+    if (GLOBAL.spself.isLong(x["BodyText"])) {
+      return (
+        <View key={i}>
+          <View style={styles.spaceContainer}>
+            <Text style={styles.spaceRow}>{}</Text>
+          </View>
+          <TouchableHighlight onPress={() => {}}>
+            <View style={styles.container}>
+              <View style={styles.container}>
+                <Text style={styles.nameRow}>{GLOBAL.currStudentName}</Text>
+              </View>
+              <View style={styles.container}>
+                <Text style={styles.dateRow}>{x["FriendlyTime"]}</Text>
+              </View>
+              <View style={styles.container}>
+                <Text style={styles.teacherRow}>{x["IssuingTeacher"]}</Text>
+              </View>
+              <Image style={{width: win.width, height: win.width / GLOBAL.spself.guardAccessWidth(i) * GLOBAL.spself.guardAccessHeight(i), marginTop: 10, marginBottom: 10}} source={{uri: x["Image"]}}/>
+              <View style={styles.container}>
+                <Text style={styles.descriptionRow}>{GLOBAL.spself.truncText(x["BodyText"])}</Text>
+                <Text style={styles.viewFullRow}>{"Tap to view full description"}</Text>
+              </View>
+            </View>
+          </TouchableHighlight>
+        </View>
+      );
+    } else {
+      return (
+        <View key={i}>
+          <View style={styles.spaceContainer}>
+            <Text style={styles.spaceRow}>{}</Text>
+          </View>
+          <TouchableHighlight onPress={() => {}}>
+            <View style={styles.container}>
+              <View style={styles.container}>
+                <Text style={styles.nameRow}>{GLOBAL.currStudentName}</Text>
+              </View>
+              <View style={styles.container}>
+                <Text style={styles.dateRow}>{x["FriendlyTime"]}</Text>
+              </View>
+              <View style={styles.container}>
+                <Text style={styles.teacherRow}>{x["IssuingTeacher"]}</Text>
+              </View>
+              <Image style={{width: win.width, height: win.width / GLOBAL.spself.guardAccessWidth(i) * GLOBAL.spself.guardAccessHeight(i), marginTop: 10, marginBottom: 10}} source={{uri: x["Image"]}}/>
+              <View style={styles.container}>
+                <Text style={styles.descriptionRow}>{GLOBAL.spself.truncText(x["BodyText"])}</Text>
+              </View>
+            </View>
+          </TouchableHighlight>
+        </View>
+      );
+    }
   }
 
   appendData(text){
-    var temparr = this.state.stcells.slice()
-    let cidx = this.state.stcells.length
+    var temparr = GLOBAL.spself.state.stcells.slice()
+    let cidx = GLOBAL.spself.state.stcells.length
     temparr.push(<Cell key={cidx} title={text} />)
-    this.setState({ stcells: temparr });
+    GLOBAL.spself.setState({ stcells: temparr });
   }
 
   modifyData(text, index){
-    var temparr = this.state.stcells.slice()
+    var temparr = GLOBAL.spself.state.stcells.slice()
     let cidx = index
     temparr.splice(index, 1, <Cell key={cidx} title={text} />)
-    this.setState({ stcells: temparr });
+    GLOBAL.spself.setState({ stcells: temparr });
   }
 
   IncrementCommendations(){
-    var currComm = parseInt(GLOBAL.currStudentProfile[0].split(" ")[1])
-    currComm += 1
-    let commString = "Commendations: ".concat(currComm.toString())
-    GLOBAL.currStudentProfile[0] = commString
-    this.modifyData(commString, 0)
-    console.log(currComm)
+    GLOBAL.viewedStudent["Commendations"] += 1
+    GLOBAL.spself.setState({numcomm: GLOBAL.viewedStudent["Commendations"]})
   }
 
   DecrementCommendations(){
-    var currComm = parseInt(GLOBAL.currStudentProfile[0].split(" ")[1])
-    currComm -= 1
-    let commString = "Commendations: ".concat(currComm.toString())
-    GLOBAL.currStudentProfile[0] = commString
-    this.modifyData(commString, 0)
-    console.log(currComm)
+    GLOBAL.viewedStudent["Commendations"] -= 1
+    GLOBAL.spself.setState({numcomm: GLOBAL.viewedStudent["Commendations"]})
   }
 
   appendGB(text){
-    GLOBAL.currStudentGB.push(GLOBAL.goodBehaviourText)
-    var temparragb = GLOBAL.currStudentGB.map(this.renderGB)
+    GLOBAL.viewedStudent["_GoodBehaviours"].push({"IssuingTeacher": GLOBAL.Data2["TeacherName"], "UnixTime": 89, "FriendlyTime": "2/8/2017", "BodyText": GLOBAL.goodBehaviourText, "Image": ""})
+    var temparragb = GLOBAL.viewedStudent["_GoodBehaviours"].map(this.renderGB)
     this.setState({ gbcells: temparragb });
   }
 
@@ -128,7 +163,7 @@ export default class studentProfile extends React.Component {
 
   commitText(){
     if (GLOBAL.SAVETHISTEXT == true){
-      this.appendGB(GLOBAL.goodBehaviourText)
+      GLOBAL.spself.appendGB(GLOBAL.goodBehaviourText)
       clearInterval(GLOBAL.BUSYCHECK)
     }
   }
@@ -137,14 +172,70 @@ export default class studentProfile extends React.Component {
     clearInterval(GLOBAL.BUSYCHECK)
     GLOBAL.goodBehaviourText = ""
     GLOBAL.SAVETHISTEXT = false
-    GLOBAL.classDisplayNavigation.push(Router.getRoute('goodBehaviour'))
-    GLOBAL.BUSYCHECK = setInterval(this.commitText, 100);
+    GLOBAL.spself.props.navigator.push(Router.getRoute('goodBehaviour'))
+    GLOBAL.BUSYCHECK = setInterval(GLOBAL.spself.commitText, 100);
+  }
+
+  truncText(x){
+    if (x.length > GLOBAL.PREFS_MAXFEEDGBLENGTH){
+      return x.substring(0,GLOBAL.PREFS_MAXFEEDGBLENGTH)+"..."
+    }
+    return x
+  }
+
+  isLong(x){
+    if (x.length > GLOBAL.PREFS_MAXFEEDGBLENGTH) {
+      return true
+    }
+    return false
+  }
+
+  guardAccessHeight(i){
+    try{
+      return this.state.heightArray[i]
+    }
+    catch(err){
+      return 1
+    }
+  }
+
+  guardAccessWidth(i){
+    try{
+      return this.state.widthArray[i]
+    }
+    catch(err){
+      return 1
+    }
+  }
+
+  guardSetHeight(x, i){
+    if (x == this.state.heightArray[i]) return
+    //DO NOT REMOVE THE ABOVE LINE. IF YOU DO, THE APP WILL FREEZE EVERY TIME YOU ATTEMPT TO OPEN GOOD BEHAVIOURS.
+    var hsliced = this.state.heightArray.slice()
+    while (hsliced.length <= i){
+      hsliced.push(1)
+    }
+    hsliced[i] = x
+    this.setState({heightArray: hsliced})
+    console.log(hsliced.length)
+  }
+
+  guardSetWidth(x, i){
+    if (x == this.state.widthArray[i]) return
+    //DO NOT REMOVE THE ABOVE LINE. IF YOU DO, THE APP WILL FREEZE EVERY TIME YOU ATTEMPT TO OPEN GOOD BEHAVIOURS.
+    var wsliced = this.state.widthArray.slice()
+    while (wsliced.length <= i){
+      wsliced.push(1)
+    }
+    wsliced[i] = x
+    this.setState({widthArray: wsliced})
+    console.log(wsliced.length)
   }
 
   render() {
-    GLOBAL.askremoveGB = this.askremoveGB
-    GLOBAL.actlaskremoveGB = this.actlaskremoveGB
-    GLOBAL.studentProfileNavigation = this.props.navigator
+    //GLOBAL.askremoveGB = this.askremoveGB
+    //GLOBAL.actlaskremoveGB = this.actlaskremoveGB
+    //GLOBAL.studentProfileNavigation = this.props.navigator
     return (
       <View style={styles.container}>
         <ScrollView
@@ -152,11 +243,14 @@ export default class studentProfile extends React.Component {
           contentContainerStyle={styles.contentContainer}>
           <TableView>
             <Section>
-              {this.state.stcells}
+              <Cell title={"Commendations: "+this.state.numcomm} />
             </Section>
             <Section>
               <Cell title={"Make Commendation"} onPress={this.IncrementCommendations}/>
               <Cell title={"Revoke Commendation"} onPress={this.DecrementCommendations}/>
+            </Section>
+            <Section>
+              {this.state.stcells}
             </Section>
             <Section>
               <Cell title={"Log Good Behaviour"} onPress={this.logGoodBehaviour} accessory="DisclosureIndicator"/>
@@ -173,6 +267,61 @@ export default class studentProfile extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  spaceRow: {
+    marginTop: 3,
+  },
+  nameRow: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 2,
+    marginLeft: 12,
+    marginRight: 12,
+  },
+  teacherRow: {
+    fontSize: 16,
+    fontStyle: 'italic',
+    marginTop: 3,
+    marginBottom: 3,
+    marginLeft: 12,
+    marginRight: 12,
+  },
+  descriptionRow: {
+    fontSize: 16,
+    marginTop: 7,
+    marginBottom: 10,
+    marginLeft: 12,
+    marginRight: 12,
+    textAlign: 'justify',
+  },
+  viewFullRow: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginLeft: 12,
+    marginRight: 12,
+    marginBottom: 10,
+    color: '#7d8187',
+  },
+  dateRow: {
+    fontSize: 16,
+    // fontWeight: 'bold',
+    marginTop: 3,
+    marginBottom: 3,
+    marginLeft: 12,
+    marginRight: 12,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  spaceContainer: {
+    flex: 1,
+    backgroundColor: '#EFEFF4',
+  },
+  imageContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
   gbText: {
     marginLeft: 12,
     fontSize: 14,

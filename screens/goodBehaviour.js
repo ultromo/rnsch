@@ -35,6 +35,7 @@ export default class goodBehaviour extends React.Component {
     this.state={text: ""}
     this.saveText = this.saveText.bind(this)
     this.clearText = this.clearText.bind(this)
+    GLOBAL.gbethis = this
   }
 
   static route = {
@@ -51,7 +52,7 @@ export default class goodBehaviour extends React.Component {
 
   saveText(){
     GLOBAL.goodBehaviourText = this.state.text
-    GLOBAL.classDisplayNavigation.pop()
+    GLOBAL.gbethis.props.navigator.pop()
     GLOBAL.SAVETHISTEXT = true
   }
 

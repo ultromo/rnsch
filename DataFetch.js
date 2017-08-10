@@ -1,6 +1,8 @@
-var Data;
+var Data2;
 
 var Feed;
+
+var feedInvalidated = true;
 
 var busywait = function(milliseconds) {
 	var dt = new Date();
@@ -8,50 +10,63 @@ var busywait = function(milliseconds) {
   }
 }
 
-var getClassList = function(){
-  if (dataInvalidated == true){
-    loadData()
-  }
-  return Data[0]
-}
-
-var getClass = function(i){
-  if (dataInvalidated == true){
-    loadData()
-  }
-  return Data[1][i]
-}
-
-var getProfiles = function(i){
-  if (dataInvalidated == true){
-    loadData()
-  }
-  return Data[2][i]
-}
-
-var getGB = function(i){
-  if (dataInvalidated == true){
-    loadData()
-  }
-  return Data[3][i]
-}
-
-var dataInvalidated = true
-
-var authenticationKey = "SMAULMAULTAUL"
-
 var loadData = function(){
-  if (dataInvalidated == true){
+  if (this.dataInvalidated == true){
     //simulated load data, server stuff not implemented yet
     //ideally we should be able to replicate changes made on server side quickly
     busywait(500);
-    Data = [["Autism", "Down Syndrome", "Cancer", "OK Can Sir"], [["Lol", "Hi"], ["Ok"], ["Is"], ["And"]], [[["Commendations: 0", "Warning Slips: 9001", "Alternate Names: \"John Cena\""], ["Commendations: 0", "Warning Slips: 9001"]], [["Commendations: 0", "Warning Slips: 9002"]], [["Commendations: 0", "Warning Slips: 9003"]], [["Commendations: 0", "Warning Slips: 9004"]]], [[["Lol is an autistic boy"], ["Hi has down syndrome"]], [["Ok is ... okay"]], [["And is ... prepositional"]], [["Is is... Istastic"]]]]
-    //data format: [[CLASSLIST:CLASS,...],[STUDENTLISTS:[CLASS:STUDENT,...],...],[STUDENTPROFILELISTS:[CLASSPROFILELIST:[STUDENTPROFILEDATA:DATAPOINT,...],...],...],[STUDENTGBLISTS:[CLASSGBLIST:[STUDENTGBDATA:DATAPOINT,...],...],...]]
-    dataInvalidated = false
+    this.Data2 = {
+		  "Classes": {
+		    "Autism": {
+		      "Lol": {
+		        "Commendations": 0,
+		        "_MiscProfileData": [
+		          "Suffers from autism"
+		        ],
+		        "_GoodBehaviours": [{"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}, {"IssuingTeacher":"Mrs Cancer McCancerFace", "UnixTime": 79, "FriendlyTime": "1/1/2017", "BodyText":"TAPU LELELE!!!", "Image":"https://timedotcom.files.wordpress.com/2017/01/170110_putinglasses.jpg?w=560"}],
+		        "_MiscNumericalProfileData": {
+		          "Warning slips": 9001
+		        }
+		      },
+		      "Hei": {
+		        "Commendations": 37,
+		        "_MiscProfileData": [
+		          "Suffers from down syndrome"
+		        ],
+		        "_GoodBehaviours": [{"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}, {"IssuingTeacher":"Mrs Cancer McCancerFace", "UnixTime": 79, "FriendlyTime": "1/1/2017", "BodyText":"TAPU LELELE!!!", "Image":"https://timedotcom.files.wordpress.com/2017/01/170110_putinglasses.jpg?w=560"}],
+		        "_MiscNumericalProfileData": {
+		          "Warning slips": 9001
+		        }
+		      }
+		    },
+		    "Down": {
+		      "Pop": {
+		        "Commendations": 0,
+		        "_MiscProfileData": [
+		          "Goes the weasel"
+		        ],
+		        "_GoodBehaviours": [{"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}, {"IssuingTeacher":"Mrs Cancer McCancerFace", "UnixTime": 79, "FriendlyTime": "1/1/2017", "BodyText":"TAPU LELELE!!!", "Image":"https://timedotcom.files.wordpress.com/2017/01/170110_putinglasses.jpg?w=560"}],
+		        "_MiscNumericalProfileData": {
+		          "Warning slips": 9001
+		        }
+		      },
+		      "Hei": {
+		        "Commendations": 37,
+		        "_MiscProfileData": [
+		          "Suffers from down syndrome"
+		        ],
+		        "_GoodBehaviours": [{"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}, {"IssuingTeacher":"Mrs Cancer McCancerFace", "UnixTime": 79, "FriendlyTime": "1/1/2017", "BodyText":"TAPU LELELE!!!", "Image":"https://timedotcom.files.wordpress.com/2017/01/170110_putinglasses.jpg?w=560"}],
+		        "_MiscNumericalProfileData": {
+		          "Warning slips": 9001
+		        }
+		      }
+		    }
+		  },
+		  "TeacherName": "Autism Spectrum Disorder"
+		}
+    this.dataInvalidated = false
   }
 }
-
-var feedInvalidated = true
 
 var loadFeed = function(){
 	if (feedInvalidated == true){
@@ -73,13 +88,11 @@ var getFeed = function(){
 //1) if we haven't implemented in-place data modification ie we modify student profiles directly when teachers make changes on their devices
 //2) how do we propagate changes in react again? my skill level too low
 
-var exports = module.exports = {}
-exports.getClassList = getClassList
-exports.getClass = getClass
-exports.getProfiles = getProfiles
-exports.authenticationKey = authenticationKey
-exports.dataInvalidated = dataInvalidated
-exports.getGB = getGB
+var exports = module.exports = {
+	dataInvalidated: true,
+	authenticationKey: "SMAULMAULTAUL"
+}
+exports.Data2 = Data2
 exports.getFeed = getFeed
 exports.loadData = loadData
 exports.loadFeed = loadFeed

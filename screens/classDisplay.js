@@ -29,6 +29,11 @@ var Item = TableView.Item;*/
 GLOBAL = require('../Globals');
 
 export default class classDisplay extends React.Component {
+  constructor(props){
+    super(props);
+    GLOBAL.cdself = this;
+  }
+
   static route = {
     navigationBar: {
       visible: true,
@@ -51,24 +56,18 @@ export default class classDisplay extends React.Component {
   }
 
   gotoStudentProfile(x, i){
+    console.log(x)
     GLOBAL.currStudentName = x
-    GLOBAL.currStudentProfile = GLOBAL.studentProfiles[i]
-    GLOBAL.currStudentGB = GLOBAL.studentGB[i]
-    GLOBAL.classDisplayNavigation.push(Router.getRoute('studentProfile'))
+    GLOBAL.viewedStudent = GLOBAL.viewedClass[x]
+    GLOBAL.cdself.props.navigator.push(Router.getRoute('studentProfile'))
   }
 
   renderItem(x, i) {
-    return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => GLOBAL.gotoStudentProfile(x, i)}/>
-  }
-
-  getData(){
-    return GLOBAL.classToDisplay
+    return <Cell key={i} title={x} accessory="DisclosureIndicator" onPress={() => GLOBAL.cdself.gotoStudentProfile(x)}/>
   }
 
   render() {
-    GLOBAL.gotoStudentProfile = this.gotoStudentProfile
-    GLOBAL.classDisplayNavigation = this.props.navigator
-    let cells = this.getData().map(this.renderItem)
+    let cells = Object.keys(GLOBAL.viewedClass).map(this.renderItem)
     return (
       <View style={styles.container}>
         <ScrollView
