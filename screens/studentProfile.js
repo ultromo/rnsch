@@ -24,6 +24,8 @@ import {
 
 import Router from '../navigation/Router';
 
+import CustomImage from '../CustomImage'
+
 /*var TableView = require('react-native-tableview');
 var Section = TableView.Section;
 var Item = TableView.Item;*/
@@ -60,32 +62,6 @@ export default class studentProfile extends React.Component {
         studentName: GLOBAL.currStudentName+"'s Profile"
       })
     }, 500)
-    if (GLOBAL.spneverupdated == true){
-      GLOBAL.spneverupdated = false
-      GLOBAL.spbusywait = setInterval(() => {
-        this.setState({gbcells: GLOBAL.viewedStudent["_GoodBehaviours"].map(this.renderGB)})
-        clearNow = true;
-        try{
-          for (i = 0; i < GLOBAL.viewedStudent["_GoodBehaviours"].length; i++){
-            if (this.state.heightArray[i] == -1 || this.state.widthArray == -1){
-              clearNow = false;
-              break;
-            }
-          }
-        }
-        catch(err){
-          clearNow = false;
-        }
-        if (clearNow == true){
-          clearInterval(GLOBAL.spbusywait)
-          console.log("Cleared")
-        }
-      }, 500)
-    }
-  }
-
-  componentWillUnmount(){
-    clearInterval(GLOBAL.spbusywait)
   }
 
   renderItem(x, i) {
@@ -93,9 +69,6 @@ export default class studentProfile extends React.Component {
   }
 
   renderGB(x, i){
-    Image.prefetch(x["Image"])
-    Image.getSize(x["Image"], (width, height) => {GLOBAL.spself.guardSetWidth(width, i); GLOBAL.spself.guardSetHeight(height, i)});
-    // <Image style={{width: win.width, height: win.width / this.state.width * this.state.height, marginTop: 10, marginBottom: 10}} source={{uri: x[5]}}/>
     if (GLOBAL.spself.isLong(x["BodyText"])) {
       return (
         <View key={i}>
@@ -113,7 +86,7 @@ export default class studentProfile extends React.Component {
               <View style={styles.container}>
                 <Text style={styles.teacherRow}>{x["IssuingTeacher"]}</Text>
               </View>
-              <Image style={{width: win.width, height: win.width / GLOBAL.spself.guardAccessWidth(i) * GLOBAL.spself.guardAccessHeight(i), marginTop: 10, marginBottom: 10}} source={{uri: x["Image"]}}/>
+              <CustomImage imageWidth={win.width} imageURL={x["Image"]}/>
               <View style={styles.container}>
                 <Text style={styles.descriptionRow}>{GLOBAL.spself.truncText(x["BodyText"])}</Text>
                 <Text style={styles.viewFullRow}>{"Tap to view full description"}</Text>
@@ -139,7 +112,7 @@ export default class studentProfile extends React.Component {
               <View style={styles.container}>
                 <Text style={styles.teacherRow}>{x["IssuingTeacher"]}</Text>
               </View>
-              <Image style={{width: win.width, height: win.width / GLOBAL.spself.guardAccessWidth(i) * GLOBAL.spself.guardAccessHeight(i), marginTop: 10, marginBottom: 10}} source={{uri: x["Image"]}}/>
+              <CustomImage imageWidth={win.width} imageURL={x["Image"]}/>
               <View style={styles.container}>
                 <Text style={styles.descriptionRow}>{GLOBAL.spself.truncText(x["BodyText"])}</Text>
               </View>
@@ -161,7 +134,7 @@ export default class studentProfile extends React.Component {
   }
 
   appendGB(text){
-    GLOBAL.viewedStudent["_GoodBehaviours"].push({"IssuingTeacher": GLOBAL.Data2["TeacherName"], "UnixTime": 89, "FriendlyTime": "2/8/2017", "BodyText": GLOBAL.goodBehaviourText, "Image": "https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png"})
+    GLOBAL.viewedStudent["_GoodBehaviours"].push({"IssuingTeacher": GLOBAL.Data2["TeacherName"], "UnixTime": 89, "FriendlyTime": "2/8/2017", "BodyText": GLOBAL.goodBehaviourText, "Image": "!!!EMPTYIMAGE"})
     var temparragb = GLOBAL.viewedStudent["_GoodBehaviours"].map(this.renderGB)
     this.setState({ gbcells: temparragb });
   }
@@ -203,59 +176,6 @@ export default class studentProfile extends React.Component {
       return true
     }
     return false
-  }
-
-  guardAccessHeight(i){
-    try{
-      if (GLOBAL.spself.state.heightArray[i] == 1){
-        return 0
-      }
-      if (GLOBAL.spself.state.heightArray[i] == -1){
-        return 1
-      }
-      return GLOBAL.spself.state.heightArray[i]
-    }
-    catch(err){
-      return 1
-    }
-  }
-
-  guardAccessWidth(i){
-    try{
-      if (GLOBAL.spself.state.widthArray[i] == -1){
-        return 1
-      }
-      return GLOBAL.spself.state.widthArray[i]
-    }
-    catch(err){
-      return 1
-    }
-  }
-
-  guardSetHeight(x, i){
-    if (x == GLOBAL.spself.state.heightArray[i]) return
-    console.log(GLOBAL.spinconstructor)
-    //DO NOT REMOVE THE ABOVE LINE. IF YOU DO, THE APP WILL FREEZE EVERY TIME YOU ATTEMPT TO OPEN GOOD BEHAVIOURS.
-    var hsliced = GLOBAL.spself.state.heightArray.slice()
-    while (hsliced.length <= i){
-      hsliced.push(-1)
-    }
-    hsliced[i] = x
-    GLOBAL.spself.setState({heightArray: hsliced})
-    console.log(hsliced.length)
-  }
-
-  guardSetWidth(x, i){
-    if (x == GLOBAL.spself.state.widthArray[i]) return
-    console.log(GLOBAL.spinconstructor)
-    //DO NOT REMOVE THE ABOVE LINE. IF YOU DO, THE APP WILL FREEZE EVERY TIME YOU ATTEMPT TO OPEN GOOD BEHAVIOURS.
-    var wsliced = GLOBAL.spself.state.widthArray.slice()
-    while (wsliced.length <= i){
-      wsliced.push(-1)
-    }
-    wsliced[i] = x
-    GLOBAL.spself.setState({widthArray: wsliced})
-    console.log(wsliced.length)
   }
 
   render() {
