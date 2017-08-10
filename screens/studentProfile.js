@@ -35,8 +35,10 @@ const win = Dimensions.get('window');
 export default class studentProfile extends React.Component {
   constructor(props) {
     super(props);
+    GLOBAL.spneverupdated = true
+    GLOBAL.spinconstructor = true
     GLOBAL.spself = this;
-    this.state={widthArray:[],heightArray:[],numcomm: GLOBAL.viewedStudent["Commendations"], stcells: GLOBAL.viewedStudent["_MiscProfileData"].map(this.renderItem), gbcells: GLOBAL.viewedStudent["_GoodBehaviours"].map(this.renderGB)};
+    this.state={widthArray:[],heightArray:[],numcomm: GLOBAL.viewedStudent["Commendations"], stcells: GLOBAL.viewedStudent["_MiscProfileData"].map(this.renderItem), gbcells: [GLOBAL.viewedStudent["_GoodBehaviours"].map(this.renderGB)]};
   }
 
   static route = {
@@ -58,6 +60,32 @@ export default class studentProfile extends React.Component {
         studentName: GLOBAL.currStudentName+"'s Profile"
       })
     }, 500)
+    if (GLOBAL.spneverupdated == true){
+      GLOBAL.spneverupdated = false
+      GLOBAL.spbusywait = setInterval(() => {
+        this.setState({gbcells: GLOBAL.viewedStudent["_GoodBehaviours"].map(this.renderGB)})
+        clearNow = true;
+        try{
+          for (i = 0; i < GLOBAL.viewedStudent["_GoodBehaviours"].length; i++){
+            if (this.state.heightArray[i] == -1 || this.state.widthArray == -1){
+              clearNow = false;
+              break;
+            }
+          }
+        }
+        catch(err){
+          clearNow = false;
+        }
+        if (clearNow == true){
+          clearInterval(GLOBAL.spbusywait)
+          console.log("Cleared")
+        }
+      }, 500)
+    }
+  }
+
+  componentWillUnmount(){
+    clearInterval(GLOBAL.spbusywait)
   }
 
   renderItem(x, i) {
@@ -65,6 +93,7 @@ export default class studentProfile extends React.Component {
   }
 
   renderGB(x, i){
+    Image.prefetch(x["Image"])
     Image.getSize(x["Image"], (width, height) => {GLOBAL.spself.guardSetWidth(width, i); GLOBAL.spself.guardSetHeight(height, i)});
     // <Image style={{width: win.width, height: win.width / this.state.width * this.state.height, marginTop: 10, marginBottom: 10}} source={{uri: x[5]}}/>
     if (GLOBAL.spself.isLong(x["BodyText"])) {
@@ -121,20 +150,6 @@ export default class studentProfile extends React.Component {
     }
   }
 
-  appendData(text){
-    var temparr = GLOBAL.spself.state.stcells.slice()
-    let cidx = GLOBAL.spself.state.stcells.length
-    temparr.push(<Cell key={cidx} title={text} />)
-    GLOBAL.spself.setState({ stcells: temparr });
-  }
-
-  modifyData(text, index){
-    var temparr = GLOBAL.spself.state.stcells.slice()
-    let cidx = index
-    temparr.splice(index, 1, <Cell key={cidx} title={text} />)
-    GLOBAL.spself.setState({ stcells: temparr });
-  }
-
   IncrementCommendations(){
     GLOBAL.viewedStudent["Commendations"] += 1
     GLOBAL.spself.setState({numcomm: GLOBAL.viewedStudent["Commendations"]})
@@ -146,7 +161,7 @@ export default class studentProfile extends React.Component {
   }
 
   appendGB(text){
-    GLOBAL.viewedStudent["_GoodBehaviours"].push({"IssuingTeacher": GLOBAL.Data2["TeacherName"], "UnixTime": 89, "FriendlyTime": "2/8/2017", "BodyText": GLOBAL.goodBehaviourText, "Image": ""})
+    GLOBAL.viewedStudent["_GoodBehaviours"].push({"IssuingTeacher": GLOBAL.Data2["TeacherName"], "UnixTime": 89, "FriendlyTime": "2/8/2017", "BodyText": GLOBAL.goodBehaviourText, "Image": "https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png"})
     var temparragb = GLOBAL.viewedStudent["_GoodBehaviours"].map(this.renderGB)
     this.setState({ gbcells: temparragb });
   }
@@ -192,7 +207,13 @@ export default class studentProfile extends React.Component {
 
   guardAccessHeight(i){
     try{
-      return this.state.heightArray[i]
+      if (GLOBAL.spself.state.heightArray[i] == 1){
+        return 0
+      }
+      if (GLOBAL.spself.state.heightArray[i] == -1){
+        return 1
+      }
+      return GLOBAL.spself.state.heightArray[i]
     }
     catch(err){
       return 1
@@ -201,7 +222,10 @@ export default class studentProfile extends React.Component {
 
   guardAccessWidth(i){
     try{
-      return this.state.widthArray[i]
+      if (GLOBAL.spself.state.widthArray[i] == -1){
+        return 1
+      }
+      return GLOBAL.spself.state.widthArray[i]
     }
     catch(err){
       return 1
@@ -209,26 +233,28 @@ export default class studentProfile extends React.Component {
   }
 
   guardSetHeight(x, i){
-    if (x == this.state.heightArray[i]) return
+    if (x == GLOBAL.spself.state.heightArray[i]) return
+    console.log(GLOBAL.spinconstructor)
     //DO NOT REMOVE THE ABOVE LINE. IF YOU DO, THE APP WILL FREEZE EVERY TIME YOU ATTEMPT TO OPEN GOOD BEHAVIOURS.
-    var hsliced = this.state.heightArray.slice()
+    var hsliced = GLOBAL.spself.state.heightArray.slice()
     while (hsliced.length <= i){
-      hsliced.push(1)
+      hsliced.push(-1)
     }
     hsliced[i] = x
-    this.setState({heightArray: hsliced})
+    GLOBAL.spself.setState({heightArray: hsliced})
     console.log(hsliced.length)
   }
 
   guardSetWidth(x, i){
-    if (x == this.state.widthArray[i]) return
+    if (x == GLOBAL.spself.state.widthArray[i]) return
+    console.log(GLOBAL.spinconstructor)
     //DO NOT REMOVE THE ABOVE LINE. IF YOU DO, THE APP WILL FREEZE EVERY TIME YOU ATTEMPT TO OPEN GOOD BEHAVIOURS.
-    var wsliced = this.state.widthArray.slice()
+    var wsliced = GLOBAL.spself.state.widthArray.slice()
     while (wsliced.length <= i){
-      wsliced.push(1)
+      wsliced.push(-1)
     }
     wsliced[i] = x
-    this.setState({widthArray: wsliced})
+    GLOBAL.spself.setState({widthArray: wsliced})
     console.log(wsliced.length)
   }
 
@@ -236,6 +262,7 @@ export default class studentProfile extends React.Component {
     //GLOBAL.askremoveGB = this.askremoveGB
     //GLOBAL.actlaskremoveGB = this.actlaskremoveGB
     //GLOBAL.studentProfileNavigation = this.props.navigator
+    GLOBAL.spinconstructor = false
     return (
       <View style={styles.container}>
         <ScrollView
@@ -243,7 +270,7 @@ export default class studentProfile extends React.Component {
           contentContainerStyle={styles.contentContainer}>
           <TableView>
             <Section>
-              <Cell title={"Commendations: "+this.state.numcomm} />
+              <Cell cellStyle={"RightDetail"} title={"Commendations"} detail={""+this.state.numcomm}/>
             </Section>
             <Section>
               <Cell title={"Make Commendation"} onPress={this.IncrementCommendations}/>

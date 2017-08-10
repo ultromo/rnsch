@@ -55,7 +55,7 @@ var loadData = function(){
 		        "_MiscProfileData": [
 		          "Suffers from down syndrome"
 		        ],
-		        "_GoodBehaviours": [{"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}, {"IssuingTeacher":"Mrs Cancer McCancerFace", "UnixTime": 79, "FriendlyTime": "1/1/2017", "BodyText":"TAPU LELELE!!!", "Image":"https://timedotcom.files.wordpress.com/2017/01/170110_putinglasses.jpg?w=560"}],
+		        "_GoodBehaviours": [{"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}, {"IssuingTeacher":"Mrs Cancer McCancerFace", "UnixTime": 79, "FriendlyTime": "1/1/2017", "BodyText":"TAPU LELELE!!!", "Image":"https://timedotcom.files.wordpress.com/2017/01/170110_putinglasses.jpg?w=560"}, {"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}, {"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}],
 		        "_MiscNumericalProfileData": {
 		          "Warning slips": 9001
 		        }
