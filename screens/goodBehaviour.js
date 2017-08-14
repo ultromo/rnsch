@@ -29,10 +29,13 @@ var Item = TableView.Item;*/
 
 GLOBAL = require('../Globals');
 
+import Expo from 'expo';
+
 export default class goodBehaviour extends React.Component {
   constructor(props) {
     super(props);
     this.state={text: ""}
+    GLOBAL.gbCanExit = true
     this.saveText = this.saveText.bind(this)
     this.clearText = this.clearText.bind(this)
     GLOBAL.gbethis = this
@@ -51,6 +54,11 @@ export default class goodBehaviour extends React.Component {
   }
 
   saveText(){
+    if (GLOBAL.gbCanExit == false){
+      console.log("Gb exit blocked by image")
+      setTimeout(() => {this.saveText()}, 100)
+      return
+    }
     GLOBAL.goodBehaviourText = this.state.text
     GLOBAL.gbethis.props.navigator.pop()
     GLOBAL.SAVETHISTEXT = true
@@ -64,6 +72,24 @@ export default class goodBehaviour extends React.Component {
     })
   }
 
+  async insertImage(){
+    let img = await Expo.ImagePicker.launchImageLibraryAsync({})
+    console.log(img)
+    if (img["cancelled"] == false){
+      GLOBAL.gbInsertedImageURL = img["uri"]
+    }
+    GLOBAL.gbCanExit = true
+  }
+
+  async takePhoto(){
+    let img = await Expo.ImagePicker.launchCameraAsync({})
+    console.log(img)
+    if (img["cancelled"] == false){
+      GLOBAL.gbInsertedImageURL = img["uri"]
+    }
+    GLOBAL.gbCanExit = true
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -73,7 +99,9 @@ export default class goodBehaviour extends React.Component {
           <TableView>
             <Section>
               <Cell key={0} title={"Save and Exit"} onPress={this.saveText}/>
-              <Cell key={1} title={"Clear"} onPress={this.clearText}/>
+              {/*<Cell key={1} title={"Clear"} onPress={this.clearText}/>*/}
+              <Cell key={2} title={"Insert Image from Camera Roll"} onPress={() => {GLOBAL.gbCanExit = false; this.insertImage()}}/>
+              <Cell key={3} title={"Take Photo"} onPress={() => {GLOBAL.gbCanExit = false; this.takePhoto()}}/>
             </Section>
           </TableView>
           <TextInput
