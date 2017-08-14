@@ -75,7 +75,7 @@ export default class studentProfile extends React.Component {
           <View style={styles.spaceContainer}>
             <Text style={styles.spaceRow}>{}</Text>
           </View>
-          <TouchableHighlight onPress={() => {}}>
+          <TouchableHighlight onPress={() => {GLOBAL.spself.viewExpanded(x, i)}}>
             <View style={styles.container}>
               <View style={styles.container}>
                 <Text style={styles.nameRow}>{GLOBAL.currStudentName}</Text>
@@ -101,7 +101,7 @@ export default class studentProfile extends React.Component {
           <View style={styles.spaceContainer}>
             <Text style={styles.spaceRow}>{}</Text>
           </View>
-          <TouchableHighlight onPress={() => {}}>
+          <TouchableHighlight onPress={() => {GLOBAL.spself.viewExpanded(x, i)}}>
             <View style={styles.container}>
               <View style={styles.container}>
                 <Text style={styles.nameRow}>{GLOBAL.currStudentName}</Text>
@@ -134,7 +134,7 @@ export default class studentProfile extends React.Component {
   }
 
   appendGB(text){
-    GLOBAL.viewedStudent["_GoodBehaviours"].push({"IssuingTeacher": GLOBAL.Data2["TeacherName"], "UnixTime": 89, "FriendlyTime": "2/8/2017", "BodyText": GLOBAL.goodBehaviourText, "Image": "!!!EMPTYIMAGE"})
+    GLOBAL.viewedStudent["_GoodBehaviours"].push({"IssuingTeacher": GLOBAL.Data2["TeacherName"], "UnixTime": 89, "FriendlyTime": "2/8/2017", "BodyText": GLOBAL.goodBehaviourText, "Image": GLOBAL.gbInsertedImageURL})
     var temparragb = GLOBAL.viewedStudent["_GoodBehaviours"].map(this.renderGB)
     this.setState({ gbcells: temparragb });
   }
@@ -159,9 +159,27 @@ export default class studentProfile extends React.Component {
   logGoodBehaviour(){
     clearInterval(GLOBAL.BUSYCHECK)
     GLOBAL.goodBehaviourText = ""
+    GLOBAL.gbInsertedImageURL = "!!!EMPTYIMAGE"
     GLOBAL.SAVETHISTEXT = false
     GLOBAL.spself.props.navigator.push(Router.getRoute('goodBehaviour'))
     GLOBAL.BUSYCHECK = setInterval(GLOBAL.spself.commitText, 100);
+  }
+
+  viewExpanded(x, i){
+    clearInterval(GLOBAL.EWBUSYCHECK)
+    GLOBAL.currGB = x
+    GLOBAL.DELETECURRENT = false
+    GLOBAL.spself.props.navigator.push(Router.getRoute('profileExpandedView'))
+    GLOBAL.EWBUSYCHECK = setInterval(() => {GLOBAL.spself.delEntry(i)}, 100)
+  }
+
+  delEntry(i){
+    if (GLOBAL.DELETECURRENT == true){
+      GLOBAL.viewedStudent["_GoodBehaviours"].splice(i, 1)
+      var temparrspgb = GLOBAL.viewedStudent["_GoodBehaviours"].map(this.renderGB)
+      this.setState({ gbcells: temparrspgb })
+      clearInterval(GLOBAL.EWBUSYCHECK)
+    }
   }
 
   truncText(x){

@@ -8,6 +8,7 @@ import classDisplay from '../screens/classDisplay';
 import studentProfile from '../screens/studentProfile'
 import goodBehaviour from '../screens/goodBehaviour'
 import expandedView from '../screens/expandedView'
+import profileExpandedView from '../screens/profileExpandedView'
 
 export default createRouter(() => ({
   home: () => HomeScreen,
@@ -18,4 +19,5 @@ export default createRouter(() => ({
   studentProfile: () => studentProfile,
   goodBehaviour: () => goodBehaviour,
   expandedView: () => expandedView,
+  profileExpandedView: () => profileExpandedView,
 }));
