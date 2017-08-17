@@ -17,52 +17,52 @@ var loadData = function(){
     busywait(500);
     this.Data2 = {
 		  "Classes": {
-		    "Autism": {
-		      "Lol": {
-		        "Commendations": 0,
+		    "4Y": {
+		      "Student A1": {
+		        "Commendations": 2,
 		        "_MiscProfileData": [
-		          "Suffers from autism"
+		          "Class Executive Committee Vice Chairman"
 		        ],
-		        "_GoodBehaviours": [{"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}, {"IssuingTeacher":"Mrs Cancer McCancerFace", "UnixTime": 79, "FriendlyTime": "1/1/2017", "BodyText":"TAPU LELELE!!!", "Image":"https://timedotcom.files.wordpress.com/2017/01/170110_putinglasses.jpg?w=560"}],
+		        "_GoodBehaviours": [{"IssuingTeacher":"Mr Teacher C", "UnixTime": 69, "FriendlyTime": "18 FEBRUARY 2017", "BodyText":"Good student! Very helpful.", "Image":"http://4.bp.blogspot.com/-Gg-J2s4LccY/UL9pRcg7bOI/AAAAAAAAAEo/QyEpHKTSMR8/s1600/Reuse-Reduce-Recycle.png"}, {"IssuingTeacher":"Mrs Teacher D", "UnixTime": 79, "FriendlyTime": "3 MAY 2016", "BodyText":"I am a nice teacher. I write nice comments.", "Image":"http://i.ndtvimg.com/i/2015-08/banana_625x350_61439959915.jpg"}],
 		        "_MiscNumericalProfileData": {
-		          "Warning slips": 9001
+		          "Warning slips": 0
 		        }
 		      },
-		      "Hei": {
-		        "Commendations": 37,
+		      "Student A2": {
+		        "Commendations": 2,
 		        "_MiscProfileData": [
-		          "Suffers from down syndrome"
+		          "Head Prefect"
 		        ],
-		        "_GoodBehaviours": [{"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}, {"IssuingTeacher":"Mrs Cancer McCancerFace", "UnixTime": 79, "FriendlyTime": "1/1/2017", "BodyText":"TAPU LELELE!!!", "Image":"https://timedotcom.files.wordpress.com/2017/01/170110_putinglasses.jpg?w=560"}],
+		        "_GoodBehaviours": [{"IssuingTeacher":"Mr Teacher C", "UnixTime": 69, "FriendlyTime": "18 FEBRUARY 2017", "BodyText":"Good student! Very helpful.", "Image":"http://4.bp.blogspot.com/-Gg-J2s4LccY/UL9pRcg7bOI/AAAAAAAAAEo/QyEpHKTSMR8/s1600/Reuse-Reduce-Recycle.png"}, {"IssuingTeacher":"Mrs Teacher D", "UnixTime": 79, "FriendlyTime": "3 MAY 2016", "BodyText":"I am a nice teacher. I write nice comments.", "Image":"http://i.ndtvimg.com/i/2015-08/banana_625x350_61439959915.jpg"}],
 		        "_MiscNumericalProfileData": {
-		          "Warning slips": 9001
+		          "Warning slips": 1
 		        }
 		      }
 		    },
-		    "Down": {
-		      "Pop": {
-		        "Commendations": 0,
+		    "3X": {
+		      "Student B1": {
+		        "Commendations": 2,
 		        "_MiscProfileData": [
-		          "Goes the weasel"
+		          "Top in Form"
 		        ],
-		        "_GoodBehaviours": [{"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}, {"IssuingTeacher":"Mrs Cancer McCancerFace", "UnixTime": 79, "FriendlyTime": "1/1/2017", "BodyText":"TAPU LELELE!!!", "Image":"https://timedotcom.files.wordpress.com/2017/01/170110_putinglasses.jpg?w=560"}],
-		        "_MiscNumericalProfileData": {
-		          "Warning slips": 9001
+		        "_GoodBehaviours": [{"IssuingTeacher":"Mr Teacher C", "UnixTime": 69, "FriendlyTime": "18 FEBRUARY 2017", "BodyText":"Good student! Very helpful.", "Image":"http://4.bp.blogspot.com/-Gg-J2s4LccY/UL9pRcg7bOI/AAAAAAAAAEo/QyEpHKTSMR8/s1600/Reuse-Reduce-Recycle.png"}, {"IssuingTeacher":"Mrs Teacher D", "UnixTime": 79, "FriendlyTime": "3 MAY 2016", "BodyText":"I am a nice teacher. I write nice comments.", "Image":"http://i.ndtvimg.com/i/2015-08/banana_625x350_61439959915.jpg"}],
+						"_MiscNumericalProfileData": {
+		          "Warning slips": 0
 		        }
 		      },
-		      "Hei": {
-		        "Commendations": 37,
+		      "Student B2": {
+		        "Commendations": 2,
 		        "_MiscProfileData": [
-		          "Suffers from down syndrome"
+		          "House Captain"
 		        ],
-		        "_GoodBehaviours": [{"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}, {"IssuingTeacher":"Mrs Cancer McCancerFace", "UnixTime": 79, "FriendlyTime": "1/1/2017", "BodyText":"TAPU LELELE!!!", "Image":"https://timedotcom.files.wordpress.com/2017/01/170110_putinglasses.jpg?w=560"}, {"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}, {"IssuingTeacher":"Mr Pyukumuku", "UnixTime": 69, "FriendlyTime": "31/12/2016", "BodyText":"TAPU KOKOKO!!!", "Image":"http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"}],
-		        "_MiscNumericalProfileData": {
-		          "Warning slips": 9001
+						"_GoodBehaviours": [{"IssuingTeacher":"Mr Teacher C", "UnixTime": 69, "FriendlyTime": "18 FEBRUARY 2017", "BodyText":"Good student! Very helpful.", "Image":"http://4.bp.blogspot.com/-Gg-J2s4LccY/UL9pRcg7bOI/AAAAAAAAAEo/QyEpHKTSMR8/s1600/Reuse-Reduce-Recycle.png"}, {"IssuingTeacher":"Mrs Teacher D", "UnixTime": 79, "FriendlyTime": "3 MAY 2016", "BodyText":"I am a nice teacher. I write nice comments.", "Image":"http://i.ndtvimg.com/i/2015-08/banana_625x350_61439959915.jpg"}],
+						"_MiscNumericalProfileData": {
+		          "Warning slips": 1
 		        }
 		      }
 		    }
 		  },
-		  "TeacherName": "Autism Spectrum Disorder"
+		  "TeacherName": "Mr GoodAtMath (You)"
 		}
     this.dataInvalidated = false
   }
@@ -71,7 +71,7 @@ var loadData = function(){
 var loadFeed = function(){
 	if (feedInvalidated == true){
 		busywait(500);
-		Feed = [["Master Jhew Hay Cong, 4D", "by Mr Cancerous McCancerFace", "Commendable behaviour! Autism observed.", "1 JANUARY 2017", 69, "http://cdn.history.com/sites/2/2015/02/golden-gate-bridge-iStock_000019197672Large-H.jpeg"], ["Jaster Hew Cay Mong, 3D", "by Mr Mhang Zheisuo", "Commendable behaviour! Autism observed. Long good behaviour strings are truncated. Tap to view full string. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "31 DECEMBER 2016", 29, "https://timedotcom.files.wordpress.com/2017/01/170110_putinglasses.jpg?w=560"]]
+		Feed = [["Student A, 4N", "by Mr Teacher A", "Commendable behaviour! Student A helped to pick up litter along the classroom corridors.", "31 FEBRUARY 2017", 69, "http://4.bp.blogspot.com/-Gg-J2s4LccY/UL9pRcg7bOI/AAAAAAAAAEo/QyEpHKTSMR8/s1600/Reuse-Reduce-Recycle.png"], ["Student B, 3X", "by Mr Teacher B", "Commendable behaviour! Student B was observed asking the canteen vendors for more fruits. Long good behaviour strings are truncated. Tap to view full string. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "31 DECEMBER 2016", 29, "http://i.ndtvimg.com/i/2015-08/banana_625x350_61439959915.jpg"]]
 		//data format: [[Student, Teacher, Commendation, Time, UnixTime], ..]
 		feedInvalidated = false
 	}

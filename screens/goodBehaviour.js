@@ -104,20 +104,22 @@ export default class goodBehaviour extends React.Component {
               <Cell key={3} title={"Take Photo"} onPress={() => {GLOBAL.gbCanExit = false; this.takePhoto()}}/>
             </Section>
           </TableView>
-          <TextInput
-            style={{height:1080, fontSize:20}}
-            multiline = {true}
-            numberOfLines = {4}
-            onChangeText={(text) => {
-              this.setState({text})
-            }}
-            value={this.state.text}
-            editable = {true}
-            maxLength = {500}
-            placeholder = "What good behaviour did you observe?"
-            placeholderTextColor = "grey"
-            autoFocus = {true}
-          />
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={{height:1080, fontSize:20}}
+              multiline = {true}
+              numberOfLines = {4}
+              onChangeText={(text) => {
+                this.setState({text})
+              }}
+              value={this.state.text}
+              editable = {true}
+              maxLength = {500}
+              placeholder = "What good behaviour did you observe?"
+              placeholderTextColor = "grey"
+              autoFocus = {true}
+            />
+          </View>
         </ScrollView>
       </View>
     );
@@ -125,6 +127,9 @@ export default class goodBehaviour extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  inputContainer: {
+    marginLeft: 12,
+  },
   row: {
     marginLeft: 12,
     fontSize: 16,
